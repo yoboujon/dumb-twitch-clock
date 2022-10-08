@@ -1,44 +1,65 @@
 #include <iostream>
 #include <math.h>
 #include <limits.h>
+#include <chrono>
+#include <thread>
+#include <string> 
 #include "../include/clock.hpp"
 
 /**
  * Constructor of clock, automatic values will be 1h00m00s
+ * @param file      Output filename for the clock
  */
-Clock::Clock() : m_hour(1), m_minute(0), m_second(0)
+Clock::Clock(std::string file) : m_file(file), m_hour(1), m_minute(0), m_second(0)
 {}
 
 /**
  * Constructor of clock, only the hour will be set, the rest will be 0
+ * @param file      Output filename for the clock
  * @param hour      Clock's hour
  */
-Clock::Clock(int hour) : m_hour(hour), m_minute(0), m_second(0)
+Clock::Clock(std::string file, int hour) : m_file(file), m_hour(hour), m_minute(0), m_second(0)
 {}
 
 /**
  * Constructor of clock, only the hour and minutes will be set, second will be set to 0
+ * @param file      Output filename for the clock
  * @param hour      Clock's hour
  * @param minute    Clock's minutes
  */
-Clock::Clock(int hour,int minute) : m_hour(hour), m_minute(minute), m_second(0)
+Clock::Clock(std::string file, int hour,int minute) : m_file(file), m_hour(hour), m_minute(minute), m_second(0)
 {}
 
 /**
  * Constructor of clock
+ * @param file      Output filename for the clock
  * @param hour      Clock's hour
  * @param minute    Clock's minutes
  * @param second    Clock's seconds
  */
-Clock::Clock(int hour,int minute,int second) : m_hour(hour), m_minute(minute), m_second(second)
+Clock::Clock(std::string file, int hour,int minute,int second) : m_file(file), m_hour(hour), m_minute(minute), m_second(second)
 {}
 
 /**
  * Prints out the clock in the following format : h:m:s
+ * Next time it will be configurable
  */
-void Clock::printClock() const
+std::string Clock::printClock() const
 {
-    std::cout << m_hour << ":" << m_minute << ":" << m_second << std::endl;
+    std::string hourString=std::to_string(m_hour)+':',minuteString=std::to_string(m_minute)+':',secondString=std::to_string(m_second);
+    if(m_hour < 10)
+    {
+        hourString = '0' + hourString;
+    }
+    if(m_minute < 10)
+    {
+        minuteString = '0' + minuteString;
+    }
+    if(m_second < 10)
+    {
+        secondString = '0' + secondString;
+    }
+    return (hourString + minuteString + secondString);
 }
 
 void Clock::modifySeconds(int count)
@@ -62,8 +83,15 @@ void Clock::modifySeconds(int count)
         }
         if(m_second < 0)        //on supprime du temps (donc négatif)
         {
-            modifyMinutes(-1);
-            m_second=60+count;
+            if(m_hour == 0 && m_minute == 0)
+            {
+                m_second = 0;
+            }
+            else
+            {
+                m_second=60+count;
+                modifyMinutes(-1);
+            }
         }
     }
 }
@@ -108,4 +136,32 @@ void Clock::modifyHours(int count)
         m_second = m_hour;
         m_minute = m_hour;
     }
+}
+
+bool Clock::hasClockEnded() const
+{
+    return (m_hour == 0 && m_minute == 0 && m_second == 0);
+}
+
+void Clock::countDown(int count)
+{
+    std::string clockText;
+    while(!hasClockEnded())
+    {
+        clockText = printClock();
+        std::cout << clockText << std::endl;
+        write2File(clockText);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        modifySeconds(-count);
+    }
+    clockText = printClock();
+    write2File(clockText);
+    std::cout << clockText << std::endl;
+}
+
+void Clock::write2File(std::string text) const
+{
+    std::ofstream fout(m_file);
+    fout << text;
+    fout.close();
 }
