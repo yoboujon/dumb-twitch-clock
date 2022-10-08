@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <limits.h>
-#include "clock.hpp"
+#include "../include/clock.hpp"
 
 /**
  * Constructor of clock, automatic values will be 1h00m00s

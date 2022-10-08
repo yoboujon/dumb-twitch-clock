@@ -1,5 +1,5 @@
-#include "value.hpp"
-#include "clock.hpp"
+#include "../include/value.hpp"
+#include "../include/clock.hpp"
 #include <chrono>
 #include <thread>
 

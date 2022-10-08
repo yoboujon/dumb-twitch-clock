@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.24)
+project(dumb_twitch_clock)
+set(CMAKE_CXX_STANDARD 11)
+file(GLOB RESOURCES "resources/*.rc")
+file(GLOB SOURCES "src/*.cpp")
+add_executable(dumb_twitch_clock ${SOURCES} ${RESOURCES})

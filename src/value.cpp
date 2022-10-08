@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <limits.h>
-#include "value.hpp"
+#include "../include/value.hpp"
 
 /**
  * Prompts a text and then returns a number entered by the user
