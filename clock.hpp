@@ -13,6 +13,9 @@ class Clock{
         Clock(int hour,int minute);
         Clock(int hour,int minute,int second);
         void printClock() const;
+        void modifySeconds(int count);
+        void modifyMinutes(int count);
+        void modifyHours(int count);
 };
 
 #endif
