@@ -41,6 +41,11 @@ Clock::Clock(std::string file, int hour,int minute,int second) : m_file(file), m
 {}
 
 /**
+ * Destructor of Clock
+*/
+Clock::~Clock(){};
+
+/**
  * Prints out the clock in the following format : h:m:s
  * Next time it will be configurable
  */
@@ -164,4 +169,10 @@ void Clock::write2File(std::string text) const
     std::ofstream fout(m_file);
     fout << text;
     fout.close();
+}
+
+void Clock::setClockTime(int h,int m,int s){
+    m_hour = h;
+    m_minute = m;
+    m_second = s;
 }

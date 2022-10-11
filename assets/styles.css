@@ -1,0 +1,135 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden
+}
+
+.upDown {
+    width: 4rem;
+    font-size: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-color: rgba(0, 0, 0, 0);
+    transition: all 0.3s ease 0s;
+    border: none;
+    color: #be82c0;
+}
+
+.upDown:hover {
+    background-color: white;
+    color: #b41bb9;
+    transform: translateY(-3px);
+    box-shadow: 0px 15px 20px rgba(116, 25, 111, 0.4);
+}
+
+.inter {
+    font-size: 2rem;
+    letter-spacing: -1px;
+    margin-left: 0.72rem;
+    margin-right: 0.72rem;
+    color: white;
+}
+
+.first-text {
+    margin-left: 1.1rem;
+}
+
+.time {
+    width: 3.55rem;
+    font-size: 2rem;
+    text-align: center;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+}
+
+.divbutton {
+    padding-left: 17.5rem;
+    padding-top: 3rem; 
+}
+
+.divclock {
+    padding-top: 12rem;
+}
+
+.start {
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    vertical-align: 0.3rem;
+    background-color: #b41bb9;
+    color: white;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease 0s;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.startAnimate {
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    vertical-align: 0.3rem;
+    background-color: #b41bb9;
+    color: white;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease 0s;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.start:hover {
+    background-color: white;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.288);
+    color: #b41bb9;
+    transform: translateY(-3px);
+}
+
+#increment {
+    text-align: center;
+    width: 3rem;
+    background-color: rgba(231, 83, 236, 0.4);
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+}
+
+.divincrement{
+    margin-left: 7.5rem;
+    margin-top: 3rem;
+}
+
+#container {
+    width: 24rem;
+    height: 0rem;
+    padding-top: 3rem;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+.divclock,
+.divbutton,
+.circle {
+    width: 100%;
+    height: 100%;
+}
+
+.circle {
+    margin-top: -9.5rem;
+    margin-left: -11rem;
+}
+
+.dot {
+    height: 32rem;
+    width: 32rem;
+    background-image: linear-gradient(45deg,#b41bb9, #76118a);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0px 15px 20px rgba(116, 25, 111, 0.4);
+  }

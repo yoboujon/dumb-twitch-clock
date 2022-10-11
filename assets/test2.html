@@ -1,0 +1,29 @@
+<html>
+    <style>
+        .classname {
+            -webkit-animation-name: cssAnimation;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-iteration-count: 1;
+            -webkit-animation-timing-function: ease;
+            -webkit-animation-fill-mode: forwards;
+        }
+
+        @-webkit-keyframes cssAnimation {
+        from {
+            -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(100px);
+        }
+        to {
+            -webkit-transform: rotate(0deg) scale(2) skew(0deg) translate(100px);
+        }
+        }
+    </style>
+    <body>
+        <input name="" type="button" onclick="ani()" value="Click">
+        <img id="img" src="https://i.stack.imgur.com/vghKS.png" width="328" height="328" />
+    </body>
+</html>
+<script>
+    function ani() {
+  document.getElementById('img').className = 'classname';
+}
+</script>

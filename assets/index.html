@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>Dumb Twitch Clock</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </header>
+    <body>
+        <div id=container>
+            <div class="circle">
+                <span class="dot"></span>
+            </div>
+            <div class="divclock">
+                <button onclick="onClickHour(1)" class="upDown up" id="Hour">▲</button>
+                <button onclick="onClickMinute(1)" class="upDown up" id="Minute">▲</button>
+                <button onclick="onClickSecond(1)" class="upDown up" id="Second">▲</button>
+                <br>
+                <input type="tel" onkeypress="return onlyNumberKey(event)" id="textHour" name="textHour" class="first-text time" value="00">
+                <span class="inter left-text">:</span>
+                <input type="text" onkeypress="return onlyNumberKey(event)" id="textMinute" name="textMinute" class="time" value="00">
+                <span class="inter left-text">:</span>
+                <input type="text" onkeypress="return onlyNumberKey(event)" id="textSecond" name="textSecond" class="time" value="00">
+                <br>
+                <button onclick="onClickHour(-1)" class="upDown down" id="Hour">▼</button>
+                <button onclick="onClickMinute(-1)" class="upDown down" id="Minute">▼</button>
+                <button onclick="onClickSecond(-1)" class="upDown down" id="Second">▼</button>
+                <div class="divincrement">
+                    <input type="text" onkeypress="return onlyNumberKey(event)" name="increment" id="increment" value="1">
+                </div>
+            </div>
+            <div class="divbutton">
+                <button type="button" class="start" id="start" onclick="timeStart()">
+                <i class="material-icons" style="font-size: 40px;padding-top: 0.4rem;">play_arrow</i>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    /* Event Listener */
+    const upDown = document.getElementsByClassName("upDown");
+    document.getElementById("increment").addEventListener('change', changeIncrement);
+    for (var i = 0; i < upDown.length; i++) {
+        upDown[i].addEventListener('click', checkTimeValues, false);
+    }
+
+    /* 
+     * Force Numbers into a text input
+     * @param evt event from the html
+     * @return bool, true if it's a number entered by the user
+    */
+    function onlyNumberKey(evt) {
+          
+          // Only ASCII character in that range allowed
+          var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+          if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+              return false;
+          return true;
+      } 
+
+    /* 
+     * Gets the text from an HTML element, convert it into an int and add it to the second argument
+     * @param docId Id of the HTML element
+     * @param add, add value (int)
+     * @return int, value of the incremented text into an int
+    */
+    function changeText(docId, add)
+    {
+        let docValue = parseInt(docId.value);
+        docValue += add;
+        return docValue;
+    }
+
+    /*
+     * Modify the Hour text, If it's between 0 and 10, adds a 0 at the start.
+     * Adds simply the new value of the text otherwise
+     * @param add, add value (int)
+     */
+    function onClickHour(add)
+    {
+        const docText = document.getElementById("textHour");
+        let textValue=changeText(docText,add);
+        if((textValue < 10) && (textValue >=0))
+        {
+            docText.value = '0' + textValue.toString();
+        }
+        else{
+            docText.value = textValue.toString();
+        }
+    }
+
+    /*
+     * Modify the Minute text, If it's between 0 and 10, adds a 0 at the start.
+     * Adds simply the new value of the text otherwise
+     * @param add, add value (int)
+     */
+    function onClickMinute(add)
+    {
+        const docText = document.getElementById("textMinute");
+        let textValue=changeText(docText,add);
+        if((textValue < 10) && (textValue >=0))
+        {
+            docText.value = '0' + textValue.toString();
+        }
+        else{
+            docText.value = textValue.toString();
+        }
+    }
+
+    /*
+     * Modify the Second text, If it's between 0 and 10, adds a 0 at the start.
+     * Adds simply the new value of the text otherwise
+     * @param add, add value (int)
+     */
+    function onClickSecond(add)
+    {
+        const docText = document.getElementById("textSecond");
+        let textValue=changeText(docText,add);
+        if((textValue < 10) && (textValue >=0))
+        {
+            docText.value = '0' + textValue.toString();
+        }
+        else{
+            docText.value = textValue.toString();
+        }
+    }
+
+    /*
+     * Launch the start button, animate it
+     */
+    function timeStart()
+    {
+        animateStartButton();
+        getTimeValue(document.getElementById("textHour").value,document.getElementById("textMinute").value,document.getElementById("textSecond").value);
+    }
+
+    /*
+     * Only for C++, grab the arguments
+     */
+    function getTimeValue(h,m,s)
+    {}
+
+    /*
+     * Change the class of the start button to animate once clicked,
+     * Sets a timeout to let the animation continue, then reset the button
+     */
+    function animateStartButton()
+    {
+        document.getElementsByClassName('start')[0].className="startAnimate";
+        setTimeout(resetStartButton, 300);
+        setTimePause();
+    }
+
+    function setTimePause()
+    {
+        let start = document.getElementById("start");
+        start.setAttribute("onclick","timePause()");
+        document.getElementsByClassName("material-icons")[0].innerHTML="pause";
+    }
+
+    /*
+     * Resets the class of the start button to not be clicked
+     */
+    function resetStartButton()
+    {
+        document.getElementsByClassName('startAnimate')[0].className="start";
+    }
+
+    /*
+     * Active every time the id "increment" changes.
+     * Modify the onclicks from every classes up and down with the increment value.
+     */
+    function changeIncrement()
+    {
+        const up = document.getElementsByClassName("up");
+        const down = document.getElementsByClassName("down");
+        let incrementValue = document.getElementById("increment").value
+        for (let i = 0; i < up.length; i++) {
+            console.log("onClick"+up[i].id+"("+incrementValue+")");
+            up[i].setAttribute("onclick","onClick"+up[i].id+"("+incrementValue+")");
+        }
+        for (let i = 0; i < down.length; i++) {
+            down[i].setAttribute("onclick","onClick"+down[i].id+"(-"+incrementValue+")")
+        }
+    }
+
+    /*
+     * For every updown classes, checks this function
+     * Verify that every value for minutes and seconds are between 60 and 0
+     * Verify that Hours arent negative.
+     */
+    function checkTimeValues()
+    {
+        const textSecond = document.getElementById("textSecond");
+        const textMinute = document.getElementById("textMinute");
+        const textHour = document.getElementById("textHour");
+        if(textSecond.value >= 60)
+        {
+            textSecond.value = "00";
+            onClickMinute(1);
+        }
+        if(textSecond.value < 0)
+        {
+            textSecond.value = 59;
+            onClickMinute(-1);
+        }
+        if(textMinute.value >= 60)
+        {
+            textMinute.value = "00";
+            onClickHour(1);
+        }
+        if(textMinute.value < 0)
+        {
+            textMinute.value = 59;
+            onClickHour(-1);
+        }
+        if(textHour.value < 0)
+        {
+            textHour.value = "00";
+            textMinute.value = "00";
+            textSecond.value = "00";
+        }
+    }
+</script>

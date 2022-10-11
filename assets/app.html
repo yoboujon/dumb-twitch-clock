@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>My First JavaScript</h2>
+    <button type="button" onclick="onButtonClick()">Click me !</button>
+    <button type="button" onclick="onCoolButtonClick()">I'm cooler, click me !</button>
+    <br><br>
+    <form action="">
+      <label for="number">Numéro de carte bleue :</label><br>
+      <input type="text" id="number" name="number">
+      <button type="button" onclick="buttonCalled()">+</button>
+    </form>
+  </body>
+</html>
+<script>
+  function buttonCalled()
+  {
+    getName(document.getElementsByName("number")[0].value,5);
+  }
+  function getName(name,number)
+  {
+    return name;
+  }
+</script>

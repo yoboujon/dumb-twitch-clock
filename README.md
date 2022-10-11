@@ -24,4 +24,6 @@ Once this done you can enjoy modifying my code and try different things !
 
 *NB : you can modify the config release by typing Debug instead*
 
+# Copyright
+> *Using ultralight https://github.com/ultralight-ux/ultralight-quick-start* 
 > *Wrote with https://markdownlivepreview.com/*
